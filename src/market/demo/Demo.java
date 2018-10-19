@@ -15,8 +15,8 @@ public class Demo {
 		MainUi mainUi = new MainUi();
 		mainUi.setVisible(true);
 		Demo demo = new Demo();
-		demo.generator.generateCustomers();
 		demo.generateCounters();
+		demo.generator.generateCustomers();
 		
 	}
 	

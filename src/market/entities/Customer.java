@@ -30,7 +30,7 @@ public class Customer implements Runnable{
 		int prodCount = generator.getRandomNumberInRange(0, 200);
 		trolley.setProductCount(prodCount);
 		boolean foundQueue = false;
-		while(foundQueue)
+		while(!foundQueue)
 		{
 			for(Counter counter : Demo.counters)
 			{
@@ -40,6 +40,7 @@ public class Customer implements Runnable{
 					if(customers.size() < 6)
 					{
 						customers.add(this);
+						System.out.println("Joined!!!");
 						// time = 10:30
 						// queue joining time //long start = System.getCurrentMilliseconds
 						foundQueue = true;
