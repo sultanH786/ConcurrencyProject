@@ -47,7 +47,13 @@ public class Counter implements Runnable{
 			}
 			//if(frontCustomer != null)
 			//{
+			    
 				frontCustomer = customers.poll();
+				if(frontCustomer != null)
+				{
+					System.out.println("Removed a customer and not null");
+				}
+				
 				int counterId = this.counterId;
 				switch (counterId) {
 				case 1:
