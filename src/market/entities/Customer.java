@@ -8,6 +8,7 @@ import market.utils.RandomNumberGenerator;
 public class Customer implements Runnable{
 	
 	private Trolley trolley;
+	// long startTime;
 	
 	public Trolley getTrolley() {
 		return trolley;
@@ -28,20 +29,42 @@ public class Customer implements Runnable{
 	public void run() {
 		int prodCount = generator.getRandomNumberInRange(0, 200);
 		trolley.setProductCount(prodCount);
-		for(Counter counter : Demo.counters)
+		boolean foundQueue = false;
+		while(foundQueue)
 		{
-			Queue<Customer> customers = counter.getCustomers();
-			synchronized (customers) 
+			for(Counter counter : Demo.counters)
 			{
-				if(customers.size() < 6)
+				Queue<Customer> customers = counter.getCustomers();
+				synchronized (customers) 
 				{
-					customers.add(this);
-					// 
-					customers.notifyAll();
+					if(customers.size() < 6)
+					{
+						customers.add(this);
+						// time = 10:30
+						// queue joining time //long start = System.getCurrentMilliseconds
+						foundQueue = true;
+						customers.notifyAll();
+					}
+					else
+					{
+						customers.notifyAll();
+					}
+					
 				}
-			}
+			}	
 		}
-		
 	}
 
 }
+
+
+
+
+
+// q 1  0
+// q 2  0
+// q 3  0
+// q 4  0
+
+
+

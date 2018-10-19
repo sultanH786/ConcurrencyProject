@@ -25,6 +25,7 @@ public class Demo {
 		for(int i = 0; i < 8; i++)
 		{
 			Counter counter = new Counter();
+			counter.setCounterId(i+1);
 			counters.add(counter);
 			new Thread(counter).start();
 		}
