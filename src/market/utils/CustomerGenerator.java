@@ -23,9 +23,10 @@ public class CustomerGenerator  {
 		    while (true) {
 		      System.out.println("Customer set is generated!!");
               int customerCount = generator.getRandomNumberInRange(0, 60);
-              for(int i=0 ; i <customerCount;i++)
+              for(int i=1 ; i <=customerCount;i++)
               {
-            	  Customer customer = new Customer();
+            	  int productCount = generator.getRandomNumberInRange(0, 200);
+            	  Customer customer = new Customer("Customer "+i,productCount);
             	  new Thread(customer, "Customer : "+i).start();
               }
 

@@ -10,9 +10,10 @@ import market.utils.CustomerGenerator;
 public class Demo {
 	CustomerGenerator generator = new CustomerGenerator();
 	public static List<Counter> counters = new ArrayList<>();
+	public static MainUi mainUi;
 	
 	public static void main(String[] args) {
-		MainUi mainUi = new MainUi();
+		mainUi = new MainUi();
 		mainUi.setVisible(true);
 		Demo demo = new Demo();
 		demo.generateCounters();
