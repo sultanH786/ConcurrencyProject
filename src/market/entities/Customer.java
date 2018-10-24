@@ -2,7 +2,7 @@ package market.entities;
 
 import java.util.Queue;
 import java.util.LinkedList;
-import java.util.Random;
+//import java.util.Random;
 import market.demo.Demo;
 import market.utils.RandomNumberGenerator;
 
@@ -10,6 +10,7 @@ public class Customer implements Runnable{
 	
 	private String customerName;
 	private int productCount;
+	private long processingTime;
 	public static int custCount;
 	public Queue<Customer> customerList=new LinkedList<>();
 	private Trolley trolley;
@@ -20,15 +21,35 @@ public Customer() {
 		
 	}
 
-	public Customer(String customerName,int productCount) {
+	public Customer(String customerName,int productCount,int time) {
 		this.customerName=customerName;
 		this.productCount=productCount;
+		this.processingTime=time;
 		trolley = new Trolley();
 		generator = new RandomNumberGenerator();
 	}
 	
 	
 	RandomNumberGenerator generator;
+	public String getCustomerName() {
+		return customerName;
+	}
+
+	public int getProductCount() {
+		return productCount;
+	}
+
+	public static int getCustCount() {
+		return custCount;
+	}
+	
+	public long getProcessingTime() {
+		return processingTime;
+	}
+
+	public void setProcessingTime(long totalWaitingTime) {
+		this.processingTime = totalWaitingTime;
+	}
 	
 	
 
@@ -46,12 +67,10 @@ public Customer() {
 				Queue<Customer> customers = counter.getCustomers();
 				synchronized (customers) 
 				{
-					if((customers.size() < 6)&&(!customers.contains(this)))
+					if((customers.size() < 6))
 					{
 						customers.add(this);
-						System.out.println( this.customerName+ " joined the Queue "+counter.getCounterId()+ " with "+ this.productCount+ " items");
-						// time = 10:30
-						// queue joining time //long start = System.getCurrentMilliseconds
+						System.out.println( this.customerName+ " joined the Queue"+counter.getCounterId()+ " with "+ this.productCount+ " items");
 						foundQueue = true;
 						customers.notifyAll();
 						break;

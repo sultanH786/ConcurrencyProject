@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Queue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
-import java.util.Queue;
+
 
 import market.demo.Demo;
 import market.utils.RandomNumberGenerator;
@@ -16,6 +16,17 @@ public class Counter implements Runnable{
 	private int counterId;
 	private long totalWaitingTime; 
 	private int totalCustomersProcessed;
+	private RandomNumberGenerator generator = new RandomNumberGenerator();
+	
+	public int getCounterId() {
+		return counterId;
+	}
+
+	public void setCounterId(int counterId) {
+		this.counterId = counterId;
+	}
+	
+	
 	
 	
 	public Queue<Customer> getCustomers() {
@@ -26,7 +37,7 @@ public class Counter implements Runnable{
 		this.customers = customers;
 	}
 
-	private RandomNumberGenerator generator = new RandomNumberGenerator();
+	
 
 	@Override
 	public void run() {
@@ -53,21 +64,64 @@ public class Counter implements Runnable{
 			//{
 			    
 				frontCustomer = customers.poll();
-				if(frontCustomer != null)
-				{
-					System.out.println("Removed a customer from the queue"+this.counterId);
-				}
-				
 				int counterId = this.counterId;
 				
-				int prodCount = frontCustomer.getTrolley().getProductCount();
+				
+				switch (counterId) {
+				case 1:
+					// get jtextField 1 here and set customer.size()
+					Demo.mainUi.getTextField().setText(""+customers.size());
+					System.out.println(customers.size());
+					break;
+				case 2:
+					// get jtextField 2 here and set customer.size()
+					Demo.mainUi.getTextField_1().setText(""+customers.size());
+					System.out.println(customers.size());
+					break;
+				case 3:
+					Demo.mainUi.getTextField_2().setText(""+customers.size());
+					System.out.println(customers.size());
+					break;
+				case 4:
+					Demo.mainUi.getTextField_3().setText(""+customers.size());
+					System.out.println(customers.size());
+					break;
+				case 5:
+					Demo.mainUi.getTextField_4().setText(""+customers.size());
+					System.out.println(customers.size());
+					break;
+				case 6:
+					Demo.mainUi.getTextField_5().setText(""+customers.size());
+					System.out.println(customers.size());
+					break;
+				case 7:
+					Demo.mainUi.getTextField_6().setText(""+customers.size());
+					System.out.println(customers.size());
+					break;
+				case 8:
+					Demo.mainUi.getTextField_7().setText(""+customers.size());
+					System.out.println(customers.size());
+					break;
+					
+		
+				default:
+					break;
+				}
+				if(frontCustomer != null)
+				{
+				
+				
+				int prodCount = frontCustomer.getProductCount();
 				for(int i = 0; i < prodCount; i++)
 				{
-					int time = generator.getRandomNumberInRange(10, 16);
+					int time = generator.getRandomNumberInRange(1, 5);
+					//System.out.println(time);
+					totalWaitingTime+=time;
+					frontCustomer.setProcessingTime(totalWaitingTime);
+					
 					try 
 					{
-						//System.out.println("Waits : "+time);
-						Thread.sleep(time);
+						Thread.sleep(time*1000);
 					}
 					catch (InterruptedException e) 
 					{
@@ -75,19 +129,7 @@ public class Counter implements Runnable{
 						e.printStackTrace();
 					}
 				}
-				switch (counterId) {
-				case 1:
-					// get jtextField 1 here and set customer.size()
-					Demo.mainUi.getTextField_9().setText(""+customers.size());
-					System.out.println(customers.size());
-					break;
-				case 2:
-					// get jtextField 2 here and set customer.size()
-					break;
-		
-				default:
-					break;
-				}
+				System.out.println(frontCustomer.getCustomerName()+" checked out from the Queue" +this.counterId+" in "+this.totalWaitingTime+" milliseconds");
 				
 			//}
 			// long endTimeForCustomer =  ..
@@ -97,14 +139,8 @@ public class Counter implements Runnable{
 		
 	}
 
-	public int getCounterId() {
-		return counterId;
-	}
-
-	public void setCounterId(int counterId) {
-		this.counterId = counterId;
-	}
 	
 	
+	}	
 
 }

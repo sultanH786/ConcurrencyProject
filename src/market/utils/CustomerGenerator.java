@@ -1,6 +1,6 @@
 package market.utils;
 
-import java.util.List;
+//import java.util.List;
 
 import market.entities.Customer;
 
@@ -22,11 +22,14 @@ public class CustomerGenerator  {
 		  public void run() {
 		    while (true) {
 		      System.out.println("Customer set is generated!!");
-              int customerCount = generator.getRandomNumberInRange(0, 60);
+              int customerCount = generator.getRandomNumberInRange(1, 60);
+              System.out.println("Number of customers: "+customerCount);
+              int time=0;
               for(int i=1 ; i <=customerCount;i++)
               {
-            	  int productCount = generator.getRandomNumberInRange(0, 200);
-            	  Customer customer = new Customer("Customer "+i,productCount);
+            	  int productCount = generator.getRandomNumberInRange(1, 200);
+            	  Customer customer = new Customer("Customer"+i,productCount,time);
+
             	  new Thread(customer, "Customer : "+i).start();
               }
 
