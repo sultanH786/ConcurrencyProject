@@ -66,7 +66,7 @@ public class Counter implements Runnable{
 				frontCustomer = customers.poll();
 				int counterId = this.counterId;
 				
-				
+				// updating UI
 				switch (counterId) {
 				case 1:
 					// get jtextField 1 here and set customer.size()
